@@ -1,5 +1,4 @@
-import React from "react";
-
+import logo from "../assets/images/logo.png";
 const Navbar = () => {
   return (
     <>
@@ -12,11 +11,7 @@ const Navbar = () => {
                 className="mr-4 flex flex-shrink-0 items-center"
                 href="/index.html"
               >
-                <img
-                  className="h-10 w-auto"
-                  src="images/logo.png"
-                  alt="React Jobs"
-                />
+                <img className="h-10 w-auto" src={logo} alt="React Jobs" />
                 <span className="ml-2 hidden text-2xl font-bold text-white md:block">
                   React Jobs
                 </span>
