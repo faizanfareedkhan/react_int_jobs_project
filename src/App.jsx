@@ -3,6 +3,10 @@ import Hero from "./components/Hero";
 import HomeCards from "./components/HomeCards";
 import JobListings from "./components/JobListings";
 import ViewAllJobs from "./components/ViewAllJobs";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(<Route index element={<h1>My App</h1>} />),
+);
 import {
   Route,
   createBrowserRouter,
