@@ -2,7 +2,7 @@
 
 This is the jobs listing project from the [YouTube react.js crash course](https://youtu.be/LDB4uaJ87e0).
 
-<img src="assets/screen.png" />
+<img src="/src/assets/screen.png" />
 
 ## Usage
 
