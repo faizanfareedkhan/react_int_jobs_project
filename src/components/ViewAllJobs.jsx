@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 const ViewAllJobs = () => {
   return (
     <section className="m-auto my-10 max-w-lg px-6">

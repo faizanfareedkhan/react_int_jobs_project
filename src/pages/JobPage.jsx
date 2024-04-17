@@ -1,11 +1,8 @@
-// import { useEffect, useState } from "react";
-// import Spinner from "../components/Spinner";
-import { useParams, useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, Link } from "react-router-dom";
 import { FaArrowLeft, FaMapMarker } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const JobPage = ({ deleteJob }) => {
-  const { id } = useParams();
   const job = useLoaderData();
 
   const navigate = useNavigate();
@@ -14,32 +11,16 @@ const JobPage = ({ deleteJob }) => {
     const confirm = window.confirm(
       "Are you sure you wnat to delete this listing",
     );
+
     if (!confirm) return;
 
     deleteJob(jobId);
+
+    toast.success("Job deleted successfully");
+
     navigate("/jobs");
   };
 
-  // const [job, setJob] = useState(null);
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   const fetchJob = async () => {
-  //     try {
-  //       const res = await fetch(`/api/jobs/${id}`);
-  //       const data = await res.json();
-  //       setJob(data);
-  //     } catch (error) {
-  //       console.log("Error Fetching Data", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchJob();
-  // }, []);
-
-  // return loading ? <Spinner /> : <h1>{job.title}</h1>;
   return (
     <>
       <section>
@@ -52,15 +33,19 @@ const JobPage = ({ deleteJob }) => {
           </Link>
         </div>
       </section>
+
       <section className=" bg-indigo-50">
         <div className="container m-auto px-6 py-10">
           <div className="grid w-full grid-cols-2 gap-6 md:grid-cols-70/30">
             <main>
               <div className="rounded-lg bg-white p-6 text-center shadow-md md:text-left">
                 <div className="mb-4 text-gray-500">{job.type}</div>
+
                 <h1 className="mb-4 text-3xl font-bold">{job.title}</h1>
+
                 <div className="mb-4 flex justify-center align-middle text-gray-500 md:justify-start">
                   <FaMapMarker className="mr-1 text-orange-700" />
+
                   <p className="text-orange-700">{job.location}</p>
                 </div>
               </div>
@@ -80,9 +65,7 @@ const JobPage = ({ deleteJob }) => {
               </div>
             </main>
 
-            {/* <!-- Sidebar --> */}
             <aside>
-              {/* <!-- Company Info --> */}
               <div className="rounded-lg bg-white p-6 shadow-md">
                 <h3 className="mb-6 text-xl font-bold">Company Info</h3>
 
@@ -105,15 +88,16 @@ const JobPage = ({ deleteJob }) => {
                 </p>
               </div>
 
-              {/* <!-- Manage --> */}
               <div className="mt-6 rounded-lg bg-white p-6 shadow-md">
                 <h3 className="mb-6 text-xl font-bold">Manage Job</h3>
+
                 <Link
-                  to={`/jobs/edit/${job.id}`}
+                  to={`/edit-job/${job.id}`}
                   className="focus:shadow-outline mt-4 block w-full rounded-full bg-indigo-500 px-4 py-2 text-center font-bold text-white hover:bg-indigo-600 focus:outline-none"
                 >
                   Edit Job
                 </Link>
+
                 <button
                   onClick={() => onDeleteClick(job.id)}
                   className="focus:shadow-outline mt-4 block w-full rounded-full bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-600 focus:outline-none"
@@ -131,7 +115,9 @@ const JobPage = ({ deleteJob }) => {
 
 const jobLoader = async ({ params }) => {
   const res = await fetch(`/api/jobs/${params.id}`);
+
   const data = await res.json();
+
   return data;
 };
 
